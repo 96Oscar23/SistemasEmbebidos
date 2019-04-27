@@ -6,4 +6,5 @@ void setup() {
 
 void loop() {
   suma();
+  Serial.println("Cambio a loop(()");
 }
