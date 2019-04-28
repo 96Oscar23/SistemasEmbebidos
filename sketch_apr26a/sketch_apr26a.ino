@@ -5,13 +5,12 @@
 
 void setup() {
   init_serial();
-  NRF_Init();
+  NRF_Init();//Se inicializa la antena de radio
 }
 
 void loop() {
-  //suma();
-  float lectura;
-  lectura = ConcentracionMQ9();
-  EnviarDato(lectura);
-  delay(500);
+  float lectura; //Guarda el dato del sensor MQ9
+  lectura = ConcentracionMQ9(); //Lee el dato del sensor MQ9
+  EnviarDato(lectura);//Envia el dato del sensor MQ9 por la antena de radio NRF24
+  delay(500);//delay
 }
