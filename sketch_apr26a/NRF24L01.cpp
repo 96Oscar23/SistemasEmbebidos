@@ -36,5 +36,5 @@ void EnviarDato(float lectura){
   { 
     Serial.println("No se envio");
   }
-  delay(500);
+  //delay(500);
 }

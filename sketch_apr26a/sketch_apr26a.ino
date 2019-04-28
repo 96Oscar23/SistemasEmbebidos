@@ -1,6 +1,7 @@
 #include "estados.h"
 #include "inicializar.h"
 #include "NRF24L01.h"
+#include "mq9.h"
 
 void setup() {
   init_serial();
@@ -10,7 +11,7 @@ void setup() {
 void loop() {
   //suma();
   float lectura;
-  lectura = 12.4;
+  lectura = ConcentracionMQ9();
   EnviarDato(lectura);
-  Serial.println("Cambio a loop(()");
+  delay(500);
 }
