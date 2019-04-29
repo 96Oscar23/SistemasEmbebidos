@@ -12,5 +12,5 @@ void loop() {
   float lectura; //Guarda el dato del sensor MQ9
   lectura = ConcentracionMQ9(); //Lee el dato del sensor MQ9
   EnviarDato(lectura);//Envia el dato del sensor MQ9 por la antena de radio NRF24
-  delay(500);//delay
+  //delay(500);//delay
 }
