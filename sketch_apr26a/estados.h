@@ -3,15 +3,20 @@
 
 #include "inicializar.h"
 
+
+
 enum estados {
     Config, Espera,No_Conf
 };
 
 enum acciones {
-    Nill, update, sleep
+    Nill, Update, Sleep
 };
 
-void suma ();
-
+void estado_config();
+void estado_espera();
+boolean serialEven(boolean comando);
+void cleanRxBuffer();
+void executeCMD();
 
 #endif
