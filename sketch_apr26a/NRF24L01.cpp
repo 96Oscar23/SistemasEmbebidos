@@ -4,8 +4,10 @@
 #define CE_PIN 9
 #define CSN_PIN 10
 
+#define WHICH_NODE 2
 //Variable con la direccion de canal a transmitir
-byte direccion[5] ={'c','a','n','a','l'};
+const uint64_t wAddress[] = {0x7878787878LL, 0xB3B4B5B6F1LL, 0xB3B4B5B6CDLL, 0xB3B4B5B6A3LL, 0xB3B4B5B60FLL, 0xB3B4B5B605LL};
+const uint64_t direccion = wAddress[ WHICH_NODE - 1 ];   // Pulls the address from the above array for this node's pipe
 
 //Variable de vector de datos a enviar
 float calidadAire[1];
