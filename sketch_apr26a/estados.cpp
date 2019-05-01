@@ -1,5 +1,18 @@
 #include "estados.h"
 
+//variables externas
+extern enum estados estadoGeneral;
+extern boolean comando;
+
+// variables globales
+char rxDataCMD[8];
+char rxDataPAR[64];
+byte reqType = 0; // 0 = AT o AT+XXXX  1 = AT+XXX=PAR
+
+int cmdSize = 0;
+int dataSize = 0;
+
+//Funciones
 void estado_config() {
   Serial.println("Configurado");
 }
@@ -16,15 +29,15 @@ void cleanRxBuffer () {
   }
 
 }
+void bufferInitState() {
+  comando = false;
+  cmdSize = 0;
+  dataSize = 0;
+  reqType = 0;
+  cleanRxBuffer();
+}
 
-char rxDataCMD[8];
-char rxDataPAR[64];
-byte reqType = 0; // 0 = AT o AT+XXXX  1 = AT+XXX=PAR
-
-int cmdSize = 0;
-int dataSize = 0;
-
-boolean serialEven(boolean comando) {
+boolean serialEven() {
   char inChar;
   while (Serial.available() ) {
     inChar = (char) Serial.read();
@@ -36,7 +49,6 @@ boolean serialEven(boolean comando) {
       }
       comando = true;
       cleanRxBuffer();
-      return comando;
     } else if (inChar == '=') {
       rxDataCMD[cmdSize] = '\0';
       reqType = 1;
@@ -52,18 +64,26 @@ boolean serialEven(boolean comando) {
 
     }
   }
-  return comando;
 }
 
 
-void executeCMD(enum estados estado) {
-  switch (estado) {
+void executeCMD() {
+  switch (estadoGeneral) {
     case Config:
-      Serial.println("configurado");
+      //Serial.println("configurado");
+      if (strcmp(rxDataCMD, "AT") == 0) {
+        Serial.println(F("OK"));
+        estadoGeneral = Espera;
+      }
       break;
     case Espera:
+      if (strcmp(rxDataCMD, "AT+CONF") == 0) {
+        Serial.println(F("Estado Configurado"));
+        estadoGeneral = Config;
+      }
       break;
     case No_Conf:
       break;
   }
+  bufferInitState();
 }

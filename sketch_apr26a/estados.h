@@ -15,8 +15,8 @@ enum acciones {
 
 void estado_config();
 void estado_espera();
-boolean serialEven(boolean comando);
+boolean serialEven();
 void cleanRxBuffer();
-void executeCMD(enum estados);
-
+void executeCMD();
+void bufferInitState();
 #endif
