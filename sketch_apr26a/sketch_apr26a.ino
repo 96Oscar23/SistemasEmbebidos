@@ -17,24 +17,24 @@ void loop() {
 
   switch (estadoGeneral) {
     case Config:
-      Serial.println("Estado configurado");
+      //Serial.println("Estado configurado");
       float lectura; //Guarda el dato del sensor MQ9
       lectura = ConcentracionMQ9(); //Lee el dato del sensor MQ9
       EnviarDato(lectura);//Envia el dato del sensor MQ9 por la antena de radio NRF24
-      estadoGeneral = Espera;
+      //estadoGeneral = Espera;
       break;
     case Espera:
       Serial.println ("Estoy esperando");
-      estadoGeneral = Config;
+      //estadoGeneral = Config;
       break;
     case No_Conf:
       break;
   }
 
-  boolean comman = serialEven( comando);
-  if (comman) {
-    //Serial.print("Si detecta que escribe: ");
-    executeCMD(estadoGeneral);
+  serialEven();
+  if (comando) {
+    Serial.print("Si detecta que escribe: ");
+    executeCMD();
   }
   delay(500);//delay
 
