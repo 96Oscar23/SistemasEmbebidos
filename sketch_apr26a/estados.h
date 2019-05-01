@@ -17,6 +17,6 @@ void estado_config();
 void estado_espera();
 boolean serialEven(boolean comando);
 void cleanRxBuffer();
-void executeCMD();
+void executeCMD(enum estados);
 
 #endif

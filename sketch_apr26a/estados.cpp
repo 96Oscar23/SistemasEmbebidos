@@ -28,7 +28,7 @@ boolean serialEven(boolean comando) {
   char inChar;
   while (Serial.available() ) {
     inChar = (char) Serial.read();
-    if (inChar == '\r') {
+    if (inChar == '\n') {
       if (reqType == 1) {
         rxDataPAR[dataSize] = '\0';
       } else {
@@ -52,10 +52,17 @@ boolean serialEven(boolean comando) {
 
     }
   }
-  
   return comando;
 }
 
-void executeCMD(){
-  switch (estado)
+void executeCMD(enum estados estado){
+   switch (estado) {
+    case Config:
+      Serial.println("configurado");
+      break;
+    case Espera:
+      break;
+    case No_Conf:
+      break;
+  }
 }
