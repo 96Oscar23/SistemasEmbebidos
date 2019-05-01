@@ -37,4 +37,5 @@ void loop() {
     executeCMD(estadoGeneral);
   }
   delay(500);//delay
+
 }

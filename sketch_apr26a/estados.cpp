@@ -10,11 +10,11 @@ void estado_espera() {
 
 }
 
-void cleanRxBuffer (){ 
-  while (Serial.available()){
+void cleanRxBuffer () {
+  while (Serial.available()) {
     Serial.read();
   }
-  
+
 }
 
 char rxDataCMD[8];
@@ -55,8 +55,9 @@ boolean serialEven(boolean comando) {
   return comando;
 }
 
-void executeCMD(enum estados estado){
-   switch (estado) {
+
+void executeCMD(enum estados estado) {
+  switch (estado) {
     case Config:
       Serial.println("configurado");
       break;
