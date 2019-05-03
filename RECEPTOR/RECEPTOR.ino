@@ -31,40 +31,40 @@ void loop()
 {
   byte pipe_num = 0;
   byte pipe_num1 = 1;
+  String cadena_Datos = "";
+  String Sensor1 = "";
+  String Sensor2 = "";
   //Se verifica si el radio esta disponible
+  
+  cadena_Datos += "Sensor1:";
   if ( radio.available(&pipe_num) )
   {
-      ReciveLectureNRF(pipe_num);
+      Sensor1 = ReciveLectureNRF(pipe_num);
+      cadena_Datos += Sensor1;
   }
   else
   {
-    Serial.print("\nRadio ");
-    Serial.print(pipe_num);
-    Serial.print(" no available\n");
+    cadena_Datos += "-1"; //Si la radio no esta disponible se envia un -1
   }
   //Se verifica si el radio esta disponible
+  cadena_Datos += ",";
+  cadena_Datos += "Sensor2:";
   if ( radio.available(&pipe_num1) )
   {
-      ReciveLectureNRF(pipe_num1); 
+      Sensor2 = ReciveLectureNRF(pipe_num1);
+      cadena_Datos += Sensor2;
   }
   else
   {
-    Serial.print("\nRadio ");
-    Serial.print(pipe_num1);
-    Serial.print(" no available\n");
+    cadena_Datos += "-1";//Si la radio no esta disponible se envia un -1
   }
+  cadena_Datos += "\n";
+  Serial.print(cadena_Datos);
   delay(500);
 }
 
-void ReciveLectureNRF(int pipe)
+String ReciveLectureNRF(int pipe)
 {
     radio.read( calidadAire, sizeof(calidadAire) );
-    if(pipe == 0){
-      Serial.print("Concentracion1: ");
-    }
-    else{
-      Serial.print("Concentracion2: ");
-    }
-    Serial.print(calidadAire[0]);
-    Serial.println();
+    return String(calidadAire[0]);
 }
